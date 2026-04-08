@@ -83,7 +83,8 @@
 
 <h1>¿ Mel, mi vida, Me perdonas? </h1>
 
-
+<!-- 🔊 BOTÓN DE MÚSICA AÑADIDO -->
+<button id="musicaBtn" onclick="reproducirMusica()">🎵 Toca aquí</button>
 
 <br>
 
@@ -93,7 +94,7 @@
 <div id="mensaje"></div>
 
 <!-- AUDIO REAL -->
-<audio id="audio" src="https://drive.google.com/uc?export=download&id=1mhyXSDuRWl9AU1nVZGERTSJjOryrMJm1"></audio>
+<audio id="audio" src="https://github.com/matiastordecilla099-coder/me-perdonas/blob/main/Flaca%20-%20Ma%C3%B1as%20Ru-Fino%20Ft.%20Ily%20Wonder%20(Prod.%20The%20Colombians).mp3"></audio>
 
 <!-- OSITOS -->
 <img id="oso1" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="top:10%; left:5%;">
@@ -103,14 +104,18 @@
 
 <script>
 
+  /* 🔊 FUNCIÓN DE MÚSICA AÑADIDA */
+  function reproducirMusica() {
+    let audio = document.getElementById("audio");
+    audio.play();
+  }
+
   /* Botón NO */
   function moverNo() {
     let boton = document.getElementById("no");
     boton.style.left = Math.random() * (window.innerWidth - 100) + "px";
     boton.style.top = Math.random() * (window.innerHeight - 50) + "px";
   }
-
-
 
   /* Botón SI */
   function aceptar() {
