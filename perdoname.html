@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¿Me perdonas?</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ffd6ec, #cce7ff);
+      text-align: center;
+    }
+
+    /* Título */
+    h1 {
+      margin-top: 40px;
+      font-size: 3.5em;
+      color: #ff69b4;
+      animation: latido 1.5s infinite;
+    }
+
+    @keyframes latido {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Botones */
+    button {
+      font-size: 1.2em;
+      padding: 12px 25px;
+      margin: 15px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+    }
+
+    #si {
+      background-color: #ffb6c1;
+    }
+
+    #no {
+      position: absolute;
+      background-color: #87cefa;
+      color: white;
+    }
+
+    #musicaBtn {
+      background-color: #ffd700;
+    }
+
+    /* Mensaje */
+    #mensaje {
+      font-size: 2em;
+      color: #ff1493;
+      margin-top: 20px;
+    }
+
+    /* Ositos */
+    .osito {
+      position: absolute;
+      width: 130px;
+      transition: 0.5s;
+    }
+
+    /* Corazones */
+    .corazon {
+      position: absolute;
+      animation: subir 5s linear infinite;
+    }
+
+    @keyframes subir {
+      0% { transform: translateY(100vh); opacity: 1; }
+      100% { transform: translateY(-10vh); opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>¿ Mel, mi vida, Me perdonas? </h1>
+
+
+
+<br>
+
+<button id="si" onclick="aceptar()">SI 💖</button>
+<button id="no" onmouseover="moverNo()">NO 💔</button>
+
+<div id="mensaje"></div>
+
+<!-- AUDIO REAL -->
+<audio id="audio" src="https://drive.google.com/uc?export=download&id=1mhyXSDuRWl9AU1nVZGERTSJjOryrMJm1"></audio>
+
+<!-- OSITOS -->
+<img id="oso1" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="top:10%; left:5%;">
+<img id="oso2" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="top:20%; right:5%;">
+<img id="oso3" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="bottom:10%; left:15%;">
+<img id="oso4" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="bottom:10%; right:15%;">
+
+<script>
+
+  /* Botón NO */
+  function moverNo() {
+    let boton = document.getElementById("no");
+    boton.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    boton.style.top = Math.random() * (window.innerHeight - 50) + "px";
+  }
+
+
+
+  /* Botón SI */
+  function aceptar() {
+    document.getElementById("mensaje").innerHTML =
+      "💖 Los ositos y yo sabiamos que dirias que si, te amo mi enojona 💖";
+
+    cambiarOsitos();
+    lanzarCorazones();
+  }
+
+  /* CAMBIAR IMÁGENES */
+  function cambiarOsitos() {
+    document.getElementById("oso1").src =
+      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
+
+    document.getElementById("oso2").src =
+      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
+
+    document.getElementById("oso3").src =
+      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
+
+    document.getElementById("oso4").src =
+      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
+  }
+
+  /* Corazones flotando */
+  function crearCorazon() {
+    let corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+    corazon.innerHTML = "💖";
+
+    corazon.style.left = Math.random() * window.innerWidth + "px";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => corazon.remove(), 5000);
+  }
+  setInterval(crearCorazon, 300);
+
+  /* EXPLOSIÓN */
+  function lanzarCorazones() {
+    for (let i = 0; i < 40; i++) {
+      let c = document.createElement("div");
+      c.innerHTML = "💖";
+      c.style.position = "absolute";
+      c.style.left = "50%";
+      c.style.top = "50%";
+
+      document.body.appendChild(c);
+
+      let x = (Math.random() - 0.5) * 800;
+      let y = (Math.random() - 0.5) * 600;
+
+      c.animate([
+        { transform: "translate(0,0)", opacity: 1 },
+        { transform: `translate(${x}px, ${y}px)`, opacity: 0 }
+      ], { duration: 1500 });
+
+      setTimeout(() => c.remove(), 1500);
+    }
+  }
+
+</script>
+
+</body>
+</html>
