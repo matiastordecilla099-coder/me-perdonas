@@ -94,9 +94,7 @@
 <div id="mensaje"></div>
 
 <!-- AUDIO REAL -->
-<audio id="audio">
-  <source src="https://raw.githubusercontent.com/matiastordecilla099-coder/me-perdonas/refs/heads/main/flaca.mp3" type="audio/mpeg">
-</audio>
+
 
 <!-- OSITOS -->
 <img id="oso1" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="top:10%; left:5%;">
@@ -107,17 +105,6 @@
 <script>
 
   /* 🔊 FUNCIÓN DE MÚSICA AÑADIDA */
-  function reproducirMusica() {
-    let audio = document.getElementById("audio");
-
-    audio.currentTime = 0;
-    audio.play().then(() => {
-      console.log("Sonando");
-    }).catch(err => {
-      alert("Toca otra vez el botón 🔊");
-    });
-  }
-  }
 
   /* Botón NO */
   function moverNo() {
