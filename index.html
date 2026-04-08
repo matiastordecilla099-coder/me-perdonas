@@ -14,7 +14,6 @@
       text-align: center;
     }
 
-    /* Título */
     h1 {
       margin-top: 40px;
       font-size: 3.5em;
@@ -28,7 +27,6 @@
       100% { transform: scale(1); }
     }
 
-    /* Botones */
     button {
       font-size: 1.2em;
       padding: 12px 25px;
@@ -52,21 +50,18 @@
       background-color: #ffd700;
     }
 
-    /* Mensaje */
     #mensaje {
       font-size: 2em;
       color: #ff1493;
       margin-top: 20px;
     }
 
-    /* Ositos */
     .osito {
       position: absolute;
       width: 130px;
       transition: 0.5s;
     }
 
-    /* Corazones */
     .corazon {
       position: absolute;
       animation: subir 5s linear infinite;
@@ -83,20 +78,19 @@
 
 <h1>¿ Mel, mi vida, Me perdonas? </h1>
 
-<!-- 🔊 BOTÓN DE MÚSICA AÑADIDO -->
-<button id="musicaBtn" onclick="reproducirMusica()">🎵 Toca aquí</button>
+<button id="musicaBtn">🎵 Toca aquí</button>
 
 <br>
 
-<button id="si" onclick="aceptar()">SI 💖</button>
-<button id="no" onmouseover="moverNo()">NO 💔</button>
+<button id="si">SI 💖</button>
+<button id="no">NO 💔</button>
 
 <div id="mensaje"></div>
 
-<!-- AUDIO REAL -->
-<audio id="audio" src="https://github.com/matiastordecilla099-coder/me-perdonas/blob/main/Flaca%20-%20Ma%C3%B1as%20Ru-Fino%20Ft.%20Ily%20Wonder%20(Prod.%20The%20Colombians).mp3"></audio>
+<audio id="audio" preload="auto">
+  <source src="https://raw.githubusercontent.com/matiastordecilla099-coder/me-perdonas/main/flaca.mp3" type="audio/mpeg">
+</audio>
 
-<!-- OSITOS -->
 <img id="oso1" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="top:10%; left:5%;">
 <img id="oso2" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="top:20%; right:5%;">
 <img id="oso3" class="osito" src="https://i.pinimg.com/originals/2a/14/cb/2a14cbc5ca811614d535f45571249a4c.png" style="bottom:10%; left:15%;">
@@ -104,65 +98,60 @@
 
 <script>
 
-  /* 🔊 FUNCIÓN DE MÚSICA AÑADIDA */
-  function reproducirMusica() {
-    let audio = document.getElementById("audio");
+  const audio = document.getElementById("audio");
+  const btnMusica = document.getElementById("musicaBtn");
+  const btnSi = document.getElementById("si");
+  const btnNo = document.getElementById("no");
 
-    audio.currentTime = 0;
-    audio.play().then(() => {
-      console.log("Sonando");
-    }).catch(err => {
-      alert("Toca otra vez el botón 🔊");
-    });
-  }
-  }
+  /* Música */
+  btnMusica.addEventListener("click", () => {
+    audio.play();
+  });
 
-  /* Botón NO */
+  /* Botón NO (funciona en celular también) */
+  btnNo.addEventListener("touchstart", moverNo);
+  btnNo.addEventListener("mouseover", moverNo);
+
   function moverNo() {
-    let boton = document.getElementById("no");
-    boton.style.left = Math.random() * (window.innerWidth - 100) + "px";
-    boton.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    btnNo.style.left = Math.random() * (window.innerWidth - 100) + "px";
+    btnNo.style.top = Math.random() * (window.innerHeight - 50) + "px";
   }
 
   /* Botón SI */
+  btnSi.addEventListener("click", aceptar);
+
   function aceptar() {
     document.getElementById("mensaje").innerHTML =
       "💖 Los ositos y yo sabiamos que dirias que si, te amo mi enojona 💖";
 
     cambiarOsitos();
     lanzarCorazones();
+    audio.play();
   }
 
-  /* CAMBIAR IMÁGENES */
+  /* Cambiar ositos */
   function cambiarOsitos() {
-    document.getElementById("oso1").src =
-      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
+    const nueva = "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
 
-    document.getElementById("oso2").src =
-      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
-
-    document.getElementById("oso3").src =
-      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
-
-    document.getElementById("oso4").src =
-      "https://i.pinimg.com/736x/bc/be/5e/bcbe5ef87e4f67e45dd314eca029db4b.jpg";
+    document.getElementById("oso1").src = nueva;
+    document.getElementById("oso2").src = nueva;
+    document.getElementById("oso3").src = nueva;
+    document.getElementById("oso4").src = nueva;
   }
 
-  /* Corazones flotando */
+  /* Corazones */
   function crearCorazon() {
     let corazon = document.createElement("div");
-    corazon.classList.add("corazon");
+    corazon.className = "corazon";
     corazon.innerHTML = "💖";
-
     corazon.style.left = Math.random() * window.innerWidth + "px";
 
     document.body.appendChild(corazon);
-
     setTimeout(() => corazon.remove(), 5000);
   }
   setInterval(crearCorazon, 300);
 
-  /* EXPLOSIÓN */
+  /* Explosión */
   function lanzarCorazones() {
     for (let i = 0; i < 40; i++) {
       let c = document.createElement("div");
